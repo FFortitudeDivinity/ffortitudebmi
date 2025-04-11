@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hidden BMI</title>
+  <meta charset="UTF-8">
+  <script>
+    function calculateBMI() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const height = parseFloat(urlParams.get('height'));
+      const weight = parseFloat(urlParams.get('weight'));
+
+      if (!isNaN(height) && !isNaN(weight)) {
+        const heightMeters = height * 0.0254;
+        const bmi = weight / (heightMeters * heightMeters);
+        parent.postMessage({ bmi: bmi.toFixed(1) }, '*');
+      }
+    }
+
+    window.onload = calculateBMI;
+  </script>
+</head>
+<body style="background:transparent;"></body>
+</html>
